@@ -4,7 +4,7 @@ module Sunspot
     # A Group groups by the unique values of a given field, or by given queries.
     #
     class Group
-      attr_accessor :limit, :truncate
+      attr_accessor :limit, :truncate, :simple
       attr_reader :fields, :queries
 
       def initialize
@@ -39,6 +39,10 @@ module Sunspot
         params[:"group.query"] = @queries.map(&:to_boolean_phrase) if @queries.any?
         params[:"group.limit"] = @limit if @limit
         params[:"group.truncate"] = @truncate if @truncate
+        if @simple
+          params[:"group.main"] = 'true'
+          params[:"group.format"] = 'simple'
+        end
 
         params
       end

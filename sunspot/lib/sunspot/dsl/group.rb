@@ -59,6 +59,10 @@ module Sunspot
         @group.truncate = true
       end
 
+      def simple
+        @group.simple = true
+      end
+
       # Specify the order that results should be returned in. This method can
       # be called multiple times; precedence will be in the order given.
       #
